@@ -1,5 +1,12 @@
 <%= render 'shared/content_title', title: 'Create a New Category' %>
 
+<h5>Current categories include:</h5>
+<% Category.all.sort.each do |category| %>
+  <ul>
+    <li><%= category.name %></li>
+  </ul>
+<% end %>
+
 <%= render 'shared/errors', obj: @category %>
 
 <div class = 'well'>
