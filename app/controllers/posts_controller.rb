@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = User.first #until we have authentication set up
     if @post.save
-      flash[:notice] = "Your post was successfully created."
+      flash['notice'] = "Your post was successfully created."
       redirect_to posts_path
     else
       render :new

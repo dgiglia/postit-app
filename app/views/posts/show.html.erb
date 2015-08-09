@@ -9,7 +9,7 @@
 </p>
 <p>
   <span class = "quiet">posted by: <%= @post.user.username %>
-    <small>at <%= @post.created_at %></small>
+    <small>at <%= display_datetime(@post.created_at) %></small>
   </span>
 </p>
 <p class = 'btn'>
@@ -39,7 +39,7 @@
     <p>
       <span class = "quiet">
         by: <%= comment.user.username %>
-        <small>at <%= comment.created_at %></small>
+        <small>at <%= display_datetime(comment.created_at) %></small>
       </span>
     </p>
   </div>
