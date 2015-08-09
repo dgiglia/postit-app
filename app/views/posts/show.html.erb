@@ -1,0 +1,46 @@
+<p>
+  <%= render @post.categories %>
+</p>
+
+<%= render 'shared/content_title', title: (link_to @post.title, fix_url(@post.url)) %>
+
+<p> <%= @post.description %>
+  <hr/>
+</p>
+<p>
+  <span class = "quiet">posted by: <%= @post.user.username %>
+    <small>at <%= @post.created_at %></small>
+  </span>
+</p>
+<p class = 'btn'>
+  <%= link_to 'Edit Post', edit_post_path %>
+</p>
+<p class = 'btn'>
+  <%= link_to 'Back to All Posts', posts_path %>
+</p>
+
+<hr/>
+
+<div class = "well span8">
+  <%= render 'shared/errors', obj: @comment %>
+  <%= form_for [@post, @comment] do |f| %>
+    <div class = 'control-group'>
+      <%= f.label :body, "Leave a Comment:" %>
+      <%= f.text_area :body, rows: 5, class: "span5" %>
+      <br/>
+      <%= f.submit "Create Comment", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<% @post.comments.each do |comment| %>
+  <div class = "well span8">
+    <p><%= comment.body %></p>
+    <p>
+      <span class = "quiet">
+        by: <%= comment.user.username %>
+        <small>at <%= comment.created_at %></small>
+      </span>
+    </p>
+  </div>
+<% end %>
