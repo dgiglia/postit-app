@@ -8,23 +8,23 @@
   <hr/>
 </p>
 <p>
-  <span class = "quiet">posted by: <%= @post.user.username %>
+  <span class="quiet">posted by: <%= @post.user.username %>
     <small>at <%= display_datetime(@post.created_at) %></small>
   </span>
 </p>
-<p class = 'btn'>
+<p class='btn'>
   <%= link_to 'Edit Post', edit_post_path(@post) %>
 </p>
-<p class = 'btn'>
+<p class='btn'>
   <%= link_to 'Back to All Posts', posts_path %>
 </p>
 
 <hr/>
 
-<div class = "well span8">
+<div class="well span8">
   <%= render 'shared/errors', obj: @comment %>
   <%= form_for [@post, @comment] do |f| %>
-    <div class = 'control-group'>
+    <div class='control-group'>
       <%= f.label :body, "Leave a Comment:" %>
       <%= f.text_area :body, rows: 5, class: "span5" %>
       <br/>
@@ -34,10 +34,10 @@
 </div>
 
 <% @post.comments.each do |comment| %>
-  <div class = "well span8">
+  <div class="well span8">
     <p><%= comment.body %></p>
     <p>
-      <span class = "quiet">
+      <span class="quiet">
         by: <%= comment.user.username %>
         <small>at <%= display_datetime(comment.created_at) %></small>
       </span>
