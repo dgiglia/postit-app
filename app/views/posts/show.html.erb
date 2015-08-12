@@ -8,7 +8,7 @@
   <hr/>
 </p>
 <p>
-  <span class="quiet">posted by: <%= @post.user.username %>
+  <span class="quiet">posted by: <%= link_to @post.user.username, user_path(@post.user) %>
     <small>at <%= display_datetime(@post.created_at) %></small>
   </span>
 </p>
@@ -24,27 +24,21 @@
 <hr/>
 
 <% if logged_in? %>
-  <div class="well span8">
-    <%= render 'shared/errors', obj: @comment %>
-    <%= form_for [@post, @comment] do |f| %>
-      <div class='control-group'>
-        <%= f.label :body, "Leave a Comment:" %>
-        <%= f.text_area :body, rows: 5, class: "span5" %>
-        <br/>
-        <%= f.submit "Create Comment", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+  <div class="row">
+    <div class="well span8">
+      <%= render 'shared/errors', obj: @comment %>
+      <%= form_for [@post, @comment] do |f| %>
+        <div class='control-group'>
+          <%= f.label :body, "Leave a Comment:" %>
+          <%= f.text_area :body, rows: 5, class: "span5" %>
+          <br/>
+          <%= f.submit "Create Comment", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
 <% @post.comments.each do |comment| %>
-  <div class="well span8">
-    <p><%= comment.body %></p>
-    <p>
-      <span class="quiet">
-        by: <%= comment.user.username %>
-        <small>at <%= display_datetime(comment.created_at) %></small>
-      </span>
-    </p>
-  </div>
+  <%= render 'comments/comment', comment: comment %>
 <% end %>

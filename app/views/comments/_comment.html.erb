@@ -1,0 +1,16 @@
+<% show_post ||= false %>
+<div class="row">
+  <div class="well span8">
+    <p>"<%= comment.body %>"</p>
+    <p>
+      <span class="quiet">
+        <% if show_post %>
+          on <%= link_to comment.post.title, post_path(comment.post) %>
+          <br/>
+        <% end %>
+        by: <%= link_to comment.user.username, user_path(comment.user) %>
+        <small>at <%= display_datetime(comment.created_at) %></small>
+      </span>
+    </p>
+  </div>
+</div>
