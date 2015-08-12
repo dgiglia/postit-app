@@ -10,10 +10,17 @@
       <%= f.label :password %>
       <%= f.password_field :password, class: 'span5' %>
     </div>
-    <%= f.submit(@user.new_record? ? "Register" : "Update Profile", class: "btn btn-primary") %>
+    <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: "btn btn-primary" %>
     <p class='btn'>
       <%= link_to 'Cancel', root_path %>
     <br/>
+    </p>
+    <p>    
+      <br/>
+      <% if !logged_in? %>
+      Already a user? 
+      <%= link_to 'Log in', login_path %>
+      <% end %>
     </p>
   <% end %>
 </div>

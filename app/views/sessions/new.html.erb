@@ -4,20 +4,20 @@
   <%= form_tag '/login' do %>
     <div class='control-group'>
       <%= label_tag :username %>
-      <%= text_field_tag :username, class: 'span5', params[:username] || '' %>
+      <%= text_field_tag :username, params[:username] || '', class: 'span5' %>
     </div>
     <div class='control-group'>
       <%= label_tag :password %>
-      <%= password_field_tag :password, class: 'span5', , params[:password] || '' %>
+      <%= password_field_tag :password, params[:password] || '', class: 'span5' %>
     </div>
     <%= submit_tag "Login", class: "btn btn-primary" %>
     <p class='btn'>
-      <%= link_to 'Register', register_path %>
-    <br/>
-    </p>
-    <p class='btn'>
       <%= link_to 'Cancel', root_path %>
     <br/>
+    </p>
+    <p>    <br/>
+      Not yet a user? 
+      <%= link_to 'Register', register_path %>
     </p>
   <% end %>
 </div>
