@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
   
   def index
     @posts = Post.all
@@ -15,7 +16,7 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-    @post.user = User.first #until we have authentication set up
+    @post.user = current_user
     if @post.save
       flash['notice'] = "Your post was successfully created."
       redirect_to posts_path
@@ -30,7 +31,7 @@ class PostsController < ApplicationController
   def update    
     if @post.update(post_params)
       flash['notice'] = "Your post was successfully updated."
-      redirect_to posts_path
+      redirect_to root_path
     else
       render :edit
     end

@@ -1,0 +1,23 @@
+<%= render 'shared/content_title', title: 'Please Log In' %>
+
+<div class='well span8'>
+  <%= form_tag '/login' do %>
+    <div class='control-group'>
+      <%= label_tag :username %>
+      <%= text_field_tag :username, class: 'span5', params[:username] || '' %>
+    </div>
+    <div class='control-group'>
+      <%= label_tag :password %>
+      <%= password_field_tag :password, class: 'span5', , params[:password] || '' %>
+    </div>
+    <%= submit_tag "Login", class: "btn btn-primary" %>
+    <p class='btn'>
+      <%= link_to 'Register', register_path %>
+    <br/>
+    </p>
+    <p class='btn'>
+      <%= link_to 'Cancel', root_path %>
+    <br/>
+    </p>
+  <% end %>
+</div>

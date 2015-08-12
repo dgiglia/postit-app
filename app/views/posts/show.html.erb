@@ -12,26 +12,30 @@
     <small>at <%= display_datetime(@post.created_at) %></small>
   </span>
 </p>
-<p class='btn'>
-  <%= link_to 'Edit Post', edit_post_path(@post) %>
-</p>
+<% if logged_in? %>
+  <p class='btn'>
+    <%= link_to 'Edit Post', edit_post_path(@post) %>
+  </p>
+<% end %>
 <p class='btn'>
   <%= link_to 'Back to All Posts', posts_path %>
 </p>
 
 <hr/>
 
-<div class="well span8">
-  <%= render 'shared/errors', obj: @comment %>
-  <%= form_for [@post, @comment] do |f| %>
-    <div class='control-group'>
-      <%= f.label :body, "Leave a Comment:" %>
-      <%= f.text_area :body, rows: 5, class: "span5" %>
-      <br/>
-      <%= f.submit "Create Comment", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-</div>
+<% if logged_in? %>
+  <div class="well span8">
+    <%= render 'shared/errors', obj: @comment %>
+    <%= form_for [@post, @comment] do |f| %>
+      <div class='control-group'>
+        <%= f.label :body, "Leave a Comment:" %>
+        <%= f.text_area :body, rows: 5, class: "span5" %>
+        <br/>
+        <%= f.submit "Create Comment", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <% @post.comments.each do |comment| %>
   <div class="well span8">
