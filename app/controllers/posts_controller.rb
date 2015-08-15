@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update]
   
   def index
     @posts = Post.all.sort_by{|x| x.total_votes}.reverse.first(25)
@@ -47,11 +48,19 @@ class PostsController < ApplicationController
     redirect_to :back
   end
   
+  private
   def post_params
     params.require(:post).permit!
   end
   
   def set_post
     @post = Post.find(params[:id])
+  end
+  
+  def require_same_user
+    if current_user != @post.user
+      flash['error'] = "You can't do that."
+      redirect_to root_path
+    end
   end
 end
