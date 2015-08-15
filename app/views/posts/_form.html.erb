@@ -16,7 +16,7 @@
     </div>
     <div class='control-group'>
       <%= f.label "Categories" %>
-      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |box| %>
+      <%= f.collection_check_boxes :category_ids, Category.all.sort{|a,b| a['name'] <=> b['name']}, :id, :name do |box| %>
         <%= box.label(class: 'checkbox inline') {box.check_box(class: 'checkbox') + box.text} %>
       <% end %>
     </div>

@@ -14,9 +14,9 @@
 
 <div style="column-count: 2"> 
   <h5>Current categories include:</h5>
-  <% Category.all.sort.each do |category| %>
+  <% Category.all.sort{|a,b| a['name']<=>b['name']}.each do |category| %>
     <ul>
-      <li><%= category.name %></li>
+      <li><%= link_to category.name, category_path(category) %></li>
     </ul>
   <% end %>
 </div>
