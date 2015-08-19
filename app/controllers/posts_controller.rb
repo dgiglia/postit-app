@@ -39,13 +39,18 @@ class PostsController < ApplicationController
   end
   
   def vote
-    @vote = Vote.create(voteable: @post, user: current_user, vote: params[:vote])
-    if @vote.errors.any?
-      flash['error'] = "You can only vote once."
-    else
-      flash['notice'] = "Your vote was counted."
+    @vote = Vote.create(voteable: @post, user: current_user, vote: params[:vote])    
+    respond_to do |format|
+      format.html do
+        if @vote.errors.any?
+          flash['error'] = "You can only vote once."
+        else
+          flash['notice'] = "Your vote was counted."
+        end
+        redirect_to :back
+      end
+      format.js
     end
-    redirect_to :back
   end
   
   private
@@ -54,7 +59,7 @@ class PostsController < ApplicationController
   end
   
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by slug: params[:id]
   end
   
   def require_same_user

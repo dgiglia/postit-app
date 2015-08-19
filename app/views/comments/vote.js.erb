@@ -1,0 +1,7 @@
+<% if @vote.errors.any? %>
+  alert("You can only vote once.");
+<% else %>
+  $("#votes_comment_<%= @comment.id %>").html("<%= @comment.total_votes %> votes");
+  alert("Your vote was counted.");
+<% end %>
+

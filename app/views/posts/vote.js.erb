@@ -1,0 +1,6 @@
+<% if @vote.errors.any? %>
+  $("#vote_error").show();
+<% else %>
+  $("#votes_post_<%= @post.to_param %>").html("<%= @post.total_votes %> votes");
+  $("#vote_success").show();
+<% end %>
