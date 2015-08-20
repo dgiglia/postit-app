@@ -63,9 +63,6 @@ class PostsController < ApplicationController
   end
   
   def require_same_user
-    if current_user != @post.user
-      flash['error'] = "You can't do that."
-      redirect_to root_path
-    end
+    access_denied unless logged_in? and (current_user == @post.user || current_user.admin?)
   end
 end

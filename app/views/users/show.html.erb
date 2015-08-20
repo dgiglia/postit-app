@@ -4,6 +4,7 @@
 <div class="row">
   <div class='well span8'>
     <p><strong>Username:</strong> <%= @user.username %></p>
+    <p><strong>Time Zone:</strong> <%= @user.time_zone %></p>
     <p><strong>Joined:</strong> <%= display_datetime(@user.created_at) %></p>
     <p><strong>Latest Post:</strong> <%= display_datetime(@user.posts.last.created_at) %>
   </div>
