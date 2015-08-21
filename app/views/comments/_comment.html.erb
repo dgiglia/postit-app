@@ -1,8 +1,8 @@
 <% show_post ||= false %>
 
-<%= render 'shared/vote_errors' %>
-
-<div class='row'>
+<div class='row'>  
+  <%= render 'shared/vote_errors' %>
+  
   <div class='well span0 text-center'>
     <% if logged_in? %>
     <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true do %> 

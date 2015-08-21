@@ -1,6 +1,12 @@
 <% if @vote.errors.any? %>
   $("#vote_error").show();
+  $("#vote_error").click(function(){
+    $("#vote_error").hide()
+  });
 <% else %>
   $("#votes_comment_<%= @comment.id %>").html("<%= @comment.total_votes %> votes");
   $("#vote_success").show();
+  $("#vote_success").click(function(){
+    $("#vote_success").hide()
+  });
 <% end %>
