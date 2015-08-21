@@ -1,41 +1,36 @@
-<div class='row'>
-  <div id='vote_error' class="alert alert-error" style='display: none' data-dismiss="alert">   
-    <p>You can only vote once.</p>
+<div class="row">
+  
+  <%= render 'shared/vote_errors' %>
+  
+  <div class='well span0 text-center'>
+    <% if logged_in? %>
+    <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %> 
+    <i class='icon-arrow-up'></i>  
+    <% end %> 
+    <br/>
+    <% end %>
+    <span id='votes_post_<%= post.to_param %>'><%= post.total_votes %> votes</span>
+    <br/>
+    <% if logged_in? %>
+    <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %> 
+    <i class='icon-arrow-down'></i>          
+    <% end %> 
+    <% end %>
   </div>
-  <div id='vote_success' class="alert alert-success" style='display: none' data-dismiss="alert">    
-    <p>Your vote was counted.</p>
+
+  <div class="well span8">
+    <%= render post.categories %>
+    <h4><%= link_to post.title, post_path(post) %></h4>
+    <p><%= post.description %></p>
+    <p>
+      <span class="quiet">posted by: <%= link_to post.user.username, user_path(post.user) %>
+        <small>at <%= display_datetime(post.created_at) %></small>
+      </span>
+      <span>
+        <small>
+          <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+        </small>
+      </span>
+    </p>
   </div>
-</div>  
-  <div class="row">
-    <div class='well span0 text-center'>
-      <% if logged_in? %>
-        <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %> 
-          <i class='icon-arrow-up'></i>  
-        <% end %> 
-        <br/>
-      <% end %>
-      <span id='votes_post_<%= post.to_param %>'><%= post.total_votes %> votes</span>
-      <br/>
-      <% if logged_in? %>
-        <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %> 
-          <i class='icon-arrow-down'></i>          
-        <% end %> 
-      <% end %>
-    </div>
-    
-    <div class="well span8">
-      <%= render post.categories %>
-      <h4><%= link_to post.title, post_path(post) %></h4>
-      <p><%= post.description %></p>
-      <p>
-        <span class="quiet">posted by: <%= link_to post.user.username, user_path(post.user) %>
-          <small>at <%= display_datetime(post.created_at) %></small>
-        </span>
-        <span>
-          <small>
-            <%= link_to("#{post.comments.size} comments", post_path(post)) %>
-          </small>
-        </span>
-      </p>
-    </div>
-  </div>
+</div> 

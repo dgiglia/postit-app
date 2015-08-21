@@ -1,7 +1,6 @@
 <% if @vote.errors.any? %>
-  alert("You can only vote once.");
+  $("#vote_error").show();
 <% else %>
   $("#votes_comment_<%= @comment.id %>").html("<%= @comment.total_votes %> votes");
-  alert("Your vote was counted.");
+  $("#vote_success").show();
 <% end %>
-
