@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   before_action :require_same_user, only: [:edit, :update]
   
   def index
-    @posts = Post.all.sort_by{|x| x.total_votes}.reverse.first(25)
+    @posts = (Post.all.limit(Post::PER_PAGE).offset(params[:offset])).sort_by{|x| x.total_votes}.reverse
+    @pages = (Post.all.size / Post::PER_PAGE) 
+    @pages += 1 if (Post.all.size % Post::PER_PAGE) > 0
   end
   
   def show
